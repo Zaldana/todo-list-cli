@@ -14,8 +14,10 @@ const multiLinePrompt = ask => {
 // Statement definiition
 let createTodo = '';
 let completeTodo = '';
-let currentTodo = "Your to-do list is empty.";
-
+let isTodocomplete = 'true';
+let actionSel = '';
+let toDosoutput ='';
+const emptyTodo = "Your to-do list is empty.";
 
 //App Welcome
 console.log(
@@ -24,34 +26,68 @@ Welcome to the To-Do List Manager Application!\n\
 \n\
 =============================================");
 
-//Current TO DOS
-console.log(currentTodo);
+//todo array
+let array = [];
+//complete array
+let compArray = [];
+
+while (actionSel !== 3) {
+
+// log out to do array
+if (array.length === 0) {
+    
+console.log(emptyTodo);
+
+} else {
+
+    for (i = 0; i < array.length; i++) {
+
+        //toDosoutput = array[i];
+console.log([i + 1] + ' [Incomplete] ' + array[i]);
+
+    }
+}
 
 //Action Selection
-let actionSel = multiLinePrompt("\n\
+actionSel = multiLinePrompt("\n\
 ~ Select an action ~\n\
 [1] Create a to-do item\n\
-[2] Complete a to-do item");
+[2] Complete a to-do item\n\
+[3]\n\
+\n\
+");
 
 // Create a to do item
 if (actionSel === "1") {
     
     newTodoprompt = multiLinePrompt("\n\
 ~ Creating a new to-do item ~\n\
-What is this to-do item called?");
-
-    newTodo = newTodoprompt
-
-// Complete a todo item    
-} if (actionSel === "2") {
-
-    let checkPrompt = multiLinePrompt("\n\
+What is this to-do item called?\n\
 \n\
-You have 1 to-do item(s).\n\
-1. [incomplete] Go to the dentist\n\
-\n\
-~ Select an action ~\n\
-[1] Create a to-do item\n\
-[2] Complete a to-do item")
-    
+");
+
+    console.log(array.push(newTodoprompt));
+
+    } if (actionSel === "2") {
+
+        console.log("You have", array.length, "to-do items(s)");
+       
+        for (i = 0; i < array.length; i++) {
+
+            console.log(array[i]);
+        
+        }
+
+        completeTodoprompt = multiLinePrompt("\n\
+which item would you like to complete?");
+
+
+
+    // for (let toDos of array) {
+
+    //     toDosoutput += toDos;
+    //     console.log("~ Select an action ~");
+    //     console.log(toDosoutput);
+    // }
+    }
 }
