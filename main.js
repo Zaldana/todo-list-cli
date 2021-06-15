@@ -44,7 +44,7 @@ console.log("\n\
 ");
 
 //While loop start/////////////////////
-while (actionSel !== "4") {
+while (actionSel !== "6") {
 
 //Empty array if statement
 if (array.length === 0) {
@@ -89,7 +89,9 @@ actionSel = multiLinePrompt("\n\
 [1] Create a to-do item.\n\
 [2] Complete a to-do item.\n\
 [3] Uncomplete a to-do item.\n\
-[4] Procrastination is THE WAY (close program).\n\
+[4] Delete to-do item.\n\
+[5] Delete complete item.\n\
+[6] Procrastination is THE WAY (close program).\n\
 \n\
 ");
 
@@ -102,6 +104,8 @@ if (actionSel === '2' && array.length === 0) {
     console.log();
     //Error message if user tries to complete without a to-do item
     console.log('ERROR, you do not have to-do items');
+    //Space
+    console.log();
 
 }
 
@@ -111,7 +115,31 @@ if (actionSel === '3' && compArray.length === 0) {
     //Space
     console.log();
     //Error message if user tries to uncomplete without a completed item
-    console.log('ERROR, you do not have ant completed to-do items');
+    console.log('ERROR, you do not have any completed to-do items');
+    //Space
+    console.log();
+
+}
+//Error if user tries to delete without a to-do item
+if (actionSel === '4' && array.length === 0) {
+
+    //Space
+    console.log();
+    //Error message if user tries to complete without a to-do item
+    console.log('ERROR, you do not have any to-do items');
+    //Space
+    console.log();
+
+}
+//Error if user tries to uncomplete without a completed item
+if (actionSel === '5' && compArray.length === 0) {
+    
+    //Space
+    console.log();
+    //Error message if user tries to uncomplete without a completed item
+    console.log('ERROR, you do not have any completed to-do items');
+    //Space
+    console.log();
 
 }
 
@@ -161,6 +189,8 @@ Which item would you like to complete?\n\
         console.log();
         //Error log
         console.log("ERROR, invalid selection");
+        //Space
+        console.log();
 
     } else {
 
@@ -183,7 +213,6 @@ Which item would you like to complete?\n\
     
     //Space    
     console.log();
-    
     //Amount of current TODOs in array
      console.log("You have", compArray.length, "completed items(s)");
        
@@ -205,12 +234,14 @@ which item would you like to uncomplete?\n\
 ");
 
 //Error if user selects wrong number
-if (Number(uncompleteTodoprompt) > array.length || Number(uncompleteTodoprompt) <= 0) {
+if (Number(uncompleteTodoprompt) > compArray.length || Number(uncompleteTodoprompt) <= 0) {
 
     //Space
     console.log();
     //Error log
     console.log("ERROR, invalid selection");
+    //Space
+    console.log();
 
     } else {
 
@@ -228,4 +259,100 @@ if (Number(uncompleteTodoprompt) > array.length || Number(uncompleteTodoprompt) 
         }
     }
 
+    //If statement would like to delete a To DO item, option 4
+    if (actionSel === "4" && array.length > 0) {
+
+        //Space
+        console.log();
+        //Amount of current TODOs in array
+        console.log("You have", array.length, "to-do items(s)");
+       
+        //Array for loop
+        for (i = 0; i < array.length; i++) {
+
+            //Number label for Todo
+            const delCompnum = i + 1;
+
+            //List of current Todos in array;
+            console.log('[' + delCompnum + '] ' + array[i]);
+        
+        }
+
+        //Prompt for user to select incomplete item
+        deleteTodoprompt = multiLinePrompt("\n\
+Which item would you like to delete?\n\
+\n\
+");
+
+    //Error if user selects wrong number
+    if (Number(deleteTodoprompt) > array.length || Number(deleteTodoprompt) <= 0) {
+
+        //Space
+        console.log();
+        //Error log
+        console.log("ERROR, invalid selection");
+        //Space
+        console.log();
+
+    } else {
+
+    //Space
+    console.log();
+    //Matching selected number to Index number
+    const delNum = Number(deleteTodoprompt) - 1;
+
+    //Remove and ToDO item from array using SPLICE
+    array.splice(delNum, 1);
+
+    }
+}
+
+//If statement if user wants to delete a complete item, option 5
+if (actionSel === '5' && compArray.length > 0) {
+    
+    //Space    
+    console.log();
+    
+    //Amount of current TODOs in array
+     console.log("You have", compArray.length, "completed items(s)");
+       
+     //compArray for loop
+     for (i = 0; i < compArray.length; i++) {
+
+         //Number label for completed Todos
+         const delCompnum = i + 1;
+
+         //Display list of current Todos in array with number label
+         console.log('[' + delCompnum + '] ' + compArray[i]);
+     
+     }
+   
+//Prompt for user to select which item to uncomplete
+delCompletetodoprompt = multiLinePrompt("\n\
+which item would you like to delete?\n\
+\n\
+");
+
+//Error if user selects wrong number
+if (Number(delCompletetodoprompt) > compArray.length || Number(delCompletetodoprompt) <= 0) {
+
+    //Space
+    console.log();
+    //Error log
+    console.log("ERROR, invalid selection");
+    //Space
+    console.log();
+
+    } else {
+
+        //Space
+        console.log();
+        //Match user selection with index number
+        const delCompnum = Number(delCompletetodoprompt) - 1;
+
+        //Delete completed item from compArray using SPLICE  
+        compArray.splice(delCompnum, 1);
+
+        }
+    }
 }
