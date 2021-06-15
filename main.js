@@ -11,83 +11,130 @@ const multiLinePrompt = ask => {
     return prompt(promptLine);                                                            
 }; 
 
-// Statement definiition
-let createTodo = '';
-let completeTodo = '';
-let isTodocomplete = 'true';
+//Blank action selection
 let actionSel = '';
-let toDosoutput ='';
+
+//Empty todo statement
 const emptyTodo = "Your to-do list is empty.";
 
-//App Welcome
-console.log(
-"\n\
-Welcome to the To-Do List Manager Application!\n\
-\n\
-=============================================");
+//ARRAYS///////////////////////////////
 
-//todo array
+//To-Do array
 let array = [];
-//complete array
+
+//Complete array
 let compArray = [];
 
-while (actionSel !== 3) {
+//App Welcome//////////////////////////
+console.log();
+console.log("/$$$$$$$$                            /$$$$$$$   /$$$$$$");
+console.log("|__  $$__/                           | $$__  $$ /$$__  $$");
+console.log("   | $$  /$$$$$$                     | $$  \\ $$| $$  \\ $$");
+console.log("   | $$ /$$__  $$       /$$$$$$      | $$  | $$| $$  | $$");
+console.log("   | $$| $$  \\ $$      |______/      | $$  | $$| $$  | $$");
+console.log("   | $$| $$  | $$                    | $$  | $$| $$  | $$");
+console.log("   | $$|  $$$$$$/                    | $$$$$$$/|  $$$$$$/");
+console.log("   |__/ \\______/                     |_______/  \\______/");
+console.log("\n\
+==========================================================\n\
+\n\
+      Welcome to the To-Do List Manager Application!\n\
+\n\
+==========================================================\n\
+");
 
-// log out to do array
+//While loop start/////////////////////
+if (actionSel !== 3) {
+
+//Empty array if statement
 if (array.length === 0) {
-    
+
+//Empty array log
 console.log(emptyTodo);
 
+//Else statement to display current To-Dos in array
 } else {
 
+    //Array for loop
     for (i = 0; i < array.length; i++) {
 
-        //toDosoutput = array[i];
-console.log([i + 1] + ' [Incomplete] ' + array[i]);
+//Add incomplete tag to ToDo in array;
+console.log(' [Incomplete] ' + array[i]);
 
     }
 }
 
-//Action Selection
-actionSel = multiLinePrompt("\n\
+if (compArray.length === 0) {
+
+    console.log();
+
+} else {
+
+    //Array for loop
+    for (i = 0; i < compArray.length; i++) {
+
+//Add incomplete tag to ToDo in array;
+console.log(' [Complete] ' + compArray[i]);
+
+    }
+
+}
+
+//Action Selection////////////////////////////
+let actionSel = multiLinePrompt("\n\
 ~ Select an action ~\n\
 [1] Create a to-do item\n\
 [2] Complete a to-do item\n\
-[3]\n\
+[3] Procrastination is the way! (close program)\n\
 \n\
 ");
 
-// Create a to do item
+//Create a to do item if statement
 if (actionSel === "1") {
     
+//New ToDo prompt    
     newTodoprompt = multiLinePrompt("\n\
 ~ Creating a new to-do item ~\n\
 What is this to-do item called?\n\
 \n\
 ");
 
-    console.log(array.push(newTodoprompt));
+//Push new item into array
+    array.push(newTodoprompt);
+    console.log();
 
+//Select to complete a to do item
     } if (actionSel === "2") {
 
+        //Amount of current TODOs in array
         console.log("You have", array.length, "to-do items(s)");
        
+        //Array for loop
         for (i = 0; i < array.length; i++) {
 
-            console.log(array[i]);
+            //Number label for Todo
+            const compNum = i + 1;
+
+            //List of current Todos in array;
+            console.log('[' + compNum + '] ' + array[i]);
         
         }
 
         completeTodoprompt = multiLinePrompt("\n\
-which item would you like to complete?");
+which item would you like to complete?\n\
+\n\
+");
 
+console.log();
+    const compNum = Number(completeTodoprompt) - 1;
 
+    // console.log(compNum);  
 
-    // for (let toDos of array) {
+    const removedItem = array.splice(compNum, 1);
 
-    //     toDosoutput += toDos;
-    //     console.log("~ Select an action ~");
-    //     console.log(toDosoutput);
-    // }
+    // console.log(removedItem);
+
+    compArray.push(removedItem);
+
     }
 }
