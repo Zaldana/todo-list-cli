@@ -59,7 +59,7 @@ console.log(emptyTodo);
     for (i = 0; i < array.length; i++) {
 
 //Add incomplete tag to ToDo in array;
-console.log(' [Incomplete] ' + array[i]);
+console.log(' [TO-DO] ' + array[i]);
 
     }
 }
@@ -77,7 +77,7 @@ if (compArray.length === 0) {
     for (i = 0; i < compArray.length; i++) {
 
 //Add complete tag and display completed array;
-console.log(' [Complete] ' + compArray[i]);
+console.log(' [DONE] ' + compArray[i]);
 
     }
 
@@ -150,12 +150,23 @@ What is this to-do item called?\n\
 
         //Prompt for user to select incomplete item
         completeTodoprompt = multiLinePrompt("\n\
-which item would you like to complete?\n\
+Which item would you like to complete?\n\
 \n\
 ");
 
-//Matching selected number to Index number
-console.log();
+    //Error if user selects wrong number
+    if (Number(completeTodoprompt) > array.length || Number(completeTodoprompt) <= 0) {
+
+        //Space
+        console.log();
+        //Error log
+        console.log("ERROR, invalid selection");
+
+    } else {
+
+    //Space
+    console.log();
+    //Matching selected number to Index number
     const compNum = Number(completeTodoprompt) - 1;
 
     //Remove and hold ToDO item from array using SPLICE
@@ -165,6 +176,7 @@ console.log();
     compArray.push(removedItem);
 
     }
+}
 
     //If statement if user wants to uncomplete item, option 3
     if (actionSel === '3' && compArray.length > 0) {
@@ -191,17 +203,29 @@ uncompleteTodoprompt = multiLinePrompt("\n\
 which item would you like to uncomplete?\n\
 \n\
 ");
+
+//Error if user selects wrong number
+if (Number(uncompleteTodoprompt) > array.length || Number(uncompleteTodoprompt) <= 0) {
+
     //Space
     console.log();
-    //Match user selection with index number
-    const uncompNum = Number(uncompleteTodoprompt) - 1;
+    //Error log
+    console.log("ERROR, invalid selection");
 
-    //Remove and hold ToDO item from compArray using SPLICE  
-    const removedComitem = compArray.splice(uncompNum, 1);
+    } else {
 
-    //PUSH removed item back into Incomplete array
-    array.push(removedComitem);
+        //Space
+        console.log();
+        //Match user selection with index number
+        const uncompNum = Number(uncompleteTodoprompt) - 1;
 
+        //Remove and hold ToDO item from compArray using SPLICE  
+        const removedComitem = compArray.splice(uncompNum, 1);
+
+        //PUSH removed item back into Incomplete array
+        array.push(removedComitem);
+
+        }
     }
 
 }
